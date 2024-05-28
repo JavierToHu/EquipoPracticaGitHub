@@ -35,6 +35,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AddEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Ubicacion" Type="varchar" Mode="In" />
+          <Parameter Name="Fecha" Type="date" Mode="In" />
+          <Parameter Name="Costo" Type="decimal" Mode="In" />
+          <Parameter Name="IdTipoEvento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEvento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllTipoEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetByIdEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEvento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateEvento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEvento" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Ubicacion" Type="varchar" Mode="In" />
+          <Parameter Name="Fecha" Type="date" Mode="In" />
+          <Parameter Name="Costo" Type="decimal" Mode="In" />
+          <Parameter Name="IdTipoEvento" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="EjercicioGitHubModelStoreContainer">
           <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoEvento" EntityType="Self.TipoEvento" Schema="dbo" store:Type="Tables" />
@@ -54,6 +77,29 @@
             <End Role="TipoEvento" EntitySet="TipoEventoes" />
             <End Role="Evento" EntitySet="Eventoes" />
           </AssociationSet>
+          <FunctionImport Name="AddEvento">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Ubicacion" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdTipoEvento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteEvento">
+            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllEvento" ReturnType="Collection(EjercicioGitHubModel.GetAllEvento_Result)" />
+          <FunctionImport Name="GetAllTipoEvento" ReturnType="Collection(EjercicioGitHubModel.GetAllTipoEvento_Result)" />
+          <FunctionImport Name="GetByIdEvento" ReturnType="Collection(EjercicioGitHubModel.GetByIdEvento_Result)">
+            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEvento">
+            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Ubicacion" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdTipoEvento" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Evento">
           <Key>
@@ -87,6 +133,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetAllEvento_Result">
+          <Property Type="Int32" Name="IdEvento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Ubicacion" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="IdTipoEvento" Nullable="true" />
+          <Property Type="String" Name="Nombre1" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetAllTipoEvento_Result">
+          <Property Type="Int32" Name="IdTipoEvento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="GetByIdEvento_Result">
+          <Property Type="Int32" Name="IdEvento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Ubicacion" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="IdTipoEvento" Nullable="true" />
+          <Property Type="String" Name="Nombre1" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -113,6 +181,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddEvento" FunctionName="EjercicioGitHubModel.Store.AddEvento" />
+          <FunctionImportMapping FunctionImportName="DeleteEvento" FunctionName="EjercicioGitHubModel.Store.DeleteEvento" />
+          <FunctionImportMapping FunctionImportName="GetAllEvento" FunctionName="EjercicioGitHubModel.Store.GetAllEvento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EjercicioGitHubModel.GetAllEvento_Result">
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
+                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllTipoEvento" FunctionName="EjercicioGitHubModel.Store.GetAllTipoEvento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EjercicioGitHubModel.GetAllTipoEvento_Result">
+                <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetByIdEvento" FunctionName="EjercicioGitHubModel.Store.GetByIdEvento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EjercicioGitHubModel.GetByIdEvento_Result">
+                <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
+                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateEvento" FunctionName="EjercicioGitHubModel.Store.UpdateEvento" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

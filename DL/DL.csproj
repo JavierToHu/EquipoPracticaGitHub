@@ -69,6 +69,15 @@
     <Compile Include="Evento.cs">
       <DependentUpon>CRUDGitHub.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAllEvento_Result.cs">
+      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAllTipoEvento_Result.cs">
+      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetByIdEvento_Result.cs">
+      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoEvento.cs">
       <DependentUpon>CRUDGitHub.tt</DependentUpon>
