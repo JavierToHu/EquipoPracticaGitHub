@@ -20,7 +20,7 @@ namespace PL.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44326/");
-                var responseTask = client.GetAsync("");
+                var responseTask = client.GetAsync("api/Evento/GetAll");
 
                 responseTask.Wait();
 
@@ -58,7 +58,7 @@ namespace PL.Controllers
                 using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri("https://localhost:44326/");
-                    var responseTask = client.GetAsync("" + IdEvento);
+                    var responseTask = client.GetAsync("api/Evento/GetById?IdEvento=" + IdEvento);
 
                     responseTask.Wait();
 
@@ -97,7 +97,7 @@ namespace PL.Controllers
                 using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri("https://localhost:44326/");
-                    var responseTask = client.PutAsJsonAsync<ML.Evento>("", evento);
+                    var responseTask = client.PutAsJsonAsync<ML.Evento>("api/Evento/Update", evento);
 
                     var resultTask = responseTask.Result;
 
@@ -117,7 +117,7 @@ namespace PL.Controllers
                 using (HttpClient client = new HttpClient())
                 {
                     client.BaseAddress = new Uri("https://localhost:44326/");
-                    var responseTask = client.PostAsJsonAsync<ML.Evento>("", evento);
+                    var responseTask = client.PostAsJsonAsync<ML.Evento>("api/Evento/Add", evento);
 
                     responseTask.Wait();
 
@@ -142,7 +142,7 @@ namespace PL.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44326/");
-                var responseTask = client.DeleteAsync("");
+                var responseTask = client.DeleteAsync("api/Evento/Delete?IdEvento=" + IdEvento);
 
                 responseTask.Wait();
 
