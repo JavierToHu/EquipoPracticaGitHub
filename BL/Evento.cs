@@ -88,17 +88,30 @@ namespace BL
 			{
 				using (DL.EjercicioGitHubEntities context = new DL.EjercicioGitHubEntities())
 				{
-					var result = context.GetAllEvento().ToList();
+					var eventos = context.GetAllEvento().ToList();
 
 					if (result != null)
 					{
 						evento.Eventos = new List<ML.Evento>();
 
-						foreach (var item in collection)
+						foreach (var eventoDB in eventos)
 						{
+							ML.Evento eventoObj = new ML.Evento();
 
-						}
+							eventoObj.IdEvento = eventoDB.IdEvento;
+							eventoObj.Nombre = eventoDB.Nombre;
+							eventoObj.Ubicacion = eventoDB.Ubicacion;
+							eventoObj.Fecha = eventoDB.Fecha;
+							eventoObj.Costo = eventoDB.Costo;
 
+							evento.Eventos.Add(eventoObj);
+                        }
+
+						return (true, null, evento.Eventos);
+                    }
+                    else
+                    {
+						return (false, "Error al recuperar los registros", null);
                     }
                 }
 			}
@@ -108,8 +121,36 @@ namespace BL
 			}
 		}
 
-		public static (bool, string, ML.Evento) GetById()
+		public static (bool, string, ML.Evento) GetById(int IdEvento)
 		{
+			ML.Evento evento = new ML.Evento();
+
+			try
+			{
+				using (DL.EjercicioGitHubEntities context = new DL.EjercicioGitHubEntities())
+				{
+					var eventoDB = context.GetById(IdEvento).singleOrDefault();
+					
+					if (eventoDB != null)
+					{
+                        evento.IdEvento = eventoDB.IdEvento;
+                        evento.Nombre = eventoDB.Nombre;
+                        evento.Ubicacion = eventoDB.Ubicacion;
+                        evento.Fecha = eventoDB.Fecha;
+                        evento.Costo = eventoDB.Costo;
+
+                        return (true, null, evento);
+                    }
+					else
+					{
+						return (false, "Error al recuperar el registro", null);
+					}
+                }
+			}
+			catch (Exception ex)
+			{
+				return (false, ex.Message, null);
+			}
 			return (false, null, null);
 		}
     }
