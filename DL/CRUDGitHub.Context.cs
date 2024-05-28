@@ -25,5 +25,7 @@ namespace DL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Evento> Eventoes { get; set; }
+        public virtual DbSet<TipoEvento> TipoEventoes { get; set; }
     }
 }

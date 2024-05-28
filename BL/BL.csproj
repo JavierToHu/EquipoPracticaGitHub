@@ -51,13 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="TipoEvento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DL\DL.csproj">
       <Project>{31d0590d-6d84-413c-9d08-a4e08e6c3b23}</Project>
       <Name>DL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ML\ML.csproj">
+      <Project>{4880b2c7-40d5-4d53-aa8c-1e4d44499971}</Project>
+      <Name>ML</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
