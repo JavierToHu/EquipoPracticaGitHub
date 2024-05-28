@@ -53,45 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EquipoPracticaGitHub.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EquipoPracticaGitHub.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EquipoPracticaGitHub.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EquipoPracticaGitHub.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EquipoPracticaGitHub.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EquipoPracticaGitHub.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="EquipoPracticaGitHub.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EquipoPracticaGitHub.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EquipoPracticaGitHub.edmx.diagram">
-      <DependentUpon>EquipoPracticaGitHub.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EquipoPracticaGitHub.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipoPracticaGitHub.edmx</DependentUpon>
-      <LastGenOutput>EquipoPracticaGitHub.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EquipoPracticaGitHub.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EquipoPracticaGitHub.edmx</DependentUpon>
-      <LastGenOutput>EquipoPracticaGitHub.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

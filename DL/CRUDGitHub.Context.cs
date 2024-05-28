@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ML
+namespace DL
 {
     using System;
     using System.Data.Entity;
