@@ -12,6 +12,8 @@ namespace DL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EjercicioGitHubEntities : DbContext
     {
@@ -25,5 +27,89 @@ namespace DL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Evento> Eventoes { get; set; }
+        public virtual DbSet<TipoEvento> TipoEventoes { get; set; }
+    
+        public virtual int AddEvento(string nombre, string ubicacion, Nullable<System.DateTime> fecha, Nullable<decimal> costo, Nullable<int> idTipoEvento)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var ubicacionParameter = ubicacion != null ?
+                new ObjectParameter("Ubicacion", ubicacion) :
+                new ObjectParameter("Ubicacion", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var costoParameter = costo.HasValue ?
+                new ObjectParameter("Costo", costo) :
+                new ObjectParameter("Costo", typeof(decimal));
+    
+            var idTipoEventoParameter = idTipoEvento.HasValue ?
+                new ObjectParameter("IdTipoEvento", idTipoEvento) :
+                new ObjectParameter("IdTipoEvento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddEvento", nombreParameter, ubicacionParameter, fechaParameter, costoParameter, idTipoEventoParameter);
+        }
+    
+        public virtual int DeleteEvento(Nullable<int> idEvento)
+        {
+            var idEventoParameter = idEvento.HasValue ?
+                new ObjectParameter("IdEvento", idEvento) :
+                new ObjectParameter("IdEvento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteEvento", idEventoParameter);
+        }
+    
+        public virtual ObjectResult<GetAllEvento_Result> GetAllEvento()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllEvento_Result>("GetAllEvento");
+        }
+    
+        public virtual ObjectResult<GetAllTipoEvento_Result> GetAllTipoEvento()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllTipoEvento_Result>("GetAllTipoEvento");
+        }
+    
+        public virtual ObjectResult<GetByIdEvento_Result> GetByIdEvento(Nullable<int> idEvento)
+        {
+            var idEventoParameter = idEvento.HasValue ?
+                new ObjectParameter("IdEvento", idEvento) :
+                new ObjectParameter("IdEvento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByIdEvento_Result>("GetByIdEvento", idEventoParameter);
+        }
+    
+        public virtual int UpdateEvento(Nullable<int> idEvento, string nombre, string ubicacion, Nullable<System.DateTime> fecha, Nullable<decimal> costo, Nullable<int> idTipoEvento)
+        {
+            var idEventoParameter = idEvento.HasValue ?
+                new ObjectParameter("IdEvento", idEvento) :
+                new ObjectParameter("IdEvento", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var ubicacionParameter = ubicacion != null ?
+                new ObjectParameter("Ubicacion", ubicacion) :
+                new ObjectParameter("Ubicacion", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var costoParameter = costo.HasValue ?
+                new ObjectParameter("Costo", costo) :
+                new ObjectParameter("Costo", typeof(decimal));
+    
+            var idTipoEventoParameter = idTipoEvento.HasValue ?
+                new ObjectParameter("IdTipoEvento", idTipoEvento) :
+                new ObjectParameter("IdTipoEvento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateEvento", idEventoParameter, nombreParameter, ubicacionParameter, fechaParameter, costoParameter, idTipoEventoParameter);
+        }
     }
 }
