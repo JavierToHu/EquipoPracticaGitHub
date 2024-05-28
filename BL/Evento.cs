@@ -159,7 +159,6 @@ namespace BL
 			{
 				return (false, ex.Message, null);
 			}
-			return (false, null, null);
 		}
     }
 }

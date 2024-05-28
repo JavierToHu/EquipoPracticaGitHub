@@ -109,13 +109,6 @@
             <End Role="TipoEvento" EntitySet="TipoEventoes" />
             <End Role="Evento" EntitySet="Eventoes" />
           </AssociationSet>
-          <FunctionImport Name="AddEvento">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="Ubicacion" Mode="In" Type="String" />
-            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="Costo" Mode="In" Type="Decimal" />
-            <Parameter Name="IdTipoEvento" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="DeleteEvento">
           <Parameter Name="IdEvento" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -130,7 +123,14 @@
           </FunctionImport>
           <FunctionImport Name="GetAllEvento" ReturnType="Collection(EjercicioGitHubModel.GetAllEvento_Result)" />
           <FunctionImport Name="GetByIdEvento" ReturnType="Collection(EjercicioGitHubModel.GetByIdEvento_Result)">
-            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+          <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AddEvento">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Ubicacion" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+            <Parameter Name="IdTipoEvento" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetAllTipoEvento_Result">
@@ -181,7 +181,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AddEvento" FunctionName="EjercicioGitHubModel.Store.AddEvento" />
           <FunctionImportMapping FunctionImportName="DeleteEvento" FunctionName="EjercicioGitHubModel.Store.DeleteEvento" />
           <FunctionImportMapping FunctionImportName="GetAllTipoEvento" FunctionName="EjercicioGitHubModel.Store.GetAllTipoEvento">
             <ResultMapping>
@@ -218,6 +217,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddEvento" FunctionName="EjercicioGitHubModel.Store.AddEvento" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -33,28 +33,29 @@
 
                         <form method="post">
 
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" id="form3Example1cg" class="form-control form-control-lg" @*asp-for="Nombre"*@ />
-                                <label class="form-label" for="form3Example1cg">Nombre</label>
+                            <div data-mdb-input-init class="form-label mb-4">
+                                @Html.LabelFor(model => model.Nombre, new { @class = "" })
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
                             </div>
 
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" id="form3Example3cg" class="form-control form-control-lg" />
-                                <label class="form-label" for="form3Example3cg">Ubicacion</label>
+                            <div data-mdb-input-init class="form-label mb-4">
+                                @Html.LabelFor(model => model.Ubicacion, new { @class = "" })
+                                @Html.TextBoxFor(model => model.Ubicacion, new { @class = "form-control" })
                             </div>
 
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="date" id="form3Example4cg" class="form-control form-control-lg" />
-                                <label class="form-label" for="form3Example4cg">Fecha</label>
+                            <div data-mdb-input-init class="form-label mb-4">
+                                @Html.LabelFor(model => model.Fecha, new { @class = "" })
+                                @Html.EditorFor(model => model.Fecha, new { @htmlAttributes = new { @class = "form-control", @type = "date" } })
                             </div>
 
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" id="form3Example4cdg" class="form-control form-control-lg" />
-                                <label class="form-label" for="form3Example4cdg">Costo</label>
+
+                            <div data-mdb-input-init class="form-label mb-4">
+                                @Html.LabelFor(model => model.Costo, new { @class = "" })
+                                @Html.TextBoxFor(model => model.Costo, new { @class = "form-control" })
                             </div>
-                            <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="text" id="form3Example4cdg" class="form-control form-control-lg" />
-                                <label class="form-label" for="form3Example4cdg">Tipo Catalogo</label>
+                            <div data-mdb-input-init class="form-label mb-4">
+                                @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
+                                @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
                             </div>
 
                             <div class="d-flex justify-content-center">
