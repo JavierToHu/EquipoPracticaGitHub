@@ -63,7 +63,7 @@ namespace BL
 			{
 				using (DL.EjercicioGitHubEntities context = new DL.EjercicioGitHubEntities())
 				{
-					int rowsAffected = context.DeleteEvento(IdEvento).toList();
+					int rowsAffected = context.DeleteEvento(IdEvento);
 
 					if (rowsAffected > 0)
 					{
