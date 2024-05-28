@@ -19,7 +19,7 @@ namespace PL.Controllers
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("");
+                client.BaseAddress = new Uri("https://localhost:44326/");
                 var responseTask = client.GetAsync("");
 
                 responseTask.Wait();
@@ -47,7 +47,7 @@ namespace PL.Controllers
         {
             ML.Evento eventoForms = new ML.Evento();
 
-            evento.TipoEvento = new ML.Evento();
+            eventoForms.TipoEvento = new ML.TipoEvento();
 
             var resulteEvento = BL.TipoEvento.GetAllTipoEvento();
             List<ML.TipoEvento> EventoLista = resulteEvento.Item3;
@@ -57,7 +57,7 @@ namespace PL.Controllers
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("");
+                    client.BaseAddress = new Uri("https://localhost:44326/");
                     var responseTask = client.GetAsync("" + IdEvento);
 
                     responseTask.Wait();
@@ -76,6 +76,10 @@ namespace PL.Controllers
 
                         return View(eventoForms);
                     }
+                    else
+                    {
+                        return View(eventoForms);
+                    }
                 }
             }
             else //ADD
@@ -92,7 +96,7 @@ namespace PL.Controllers
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("");
+                    client.BaseAddress = new Uri("https://localhost:44326/");
                     var responseTask = client.PutAsJsonAsync<ML.Evento>("", evento);
 
                     var resultTask = responseTask.Result;
@@ -105,13 +109,14 @@ namespace PL.Controllers
                     {
                         ViewBag.Text = "No se actualizo exitosamente";
                     }
+                    return PartialView("Modal");
                 }
             }
             else //ADD
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("");
+                    client.BaseAddress = new Uri("https://localhost:44326/");
                     var responseTask = client.PostAsJsonAsync<ML.Evento>("", evento);
 
                     responseTask.Wait();
@@ -126,6 +131,7 @@ namespace PL.Controllers
                     {
                         ViewBag.Text = "No se agrego exitosamente";
                     }
+                    return PartialView("Modal");
                 }
             }
         }
@@ -135,7 +141,7 @@ namespace PL.Controllers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("");
+                client.BaseAddress = new Uri("https://localhost:44326/");
                 var responseTask = client.DeleteAsync("");
 
                 responseTask.Wait();

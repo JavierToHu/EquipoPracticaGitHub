@@ -21,7 +21,7 @@
             <PropertyRef Name="IdTipoEvento" />
           </Key>
           <Property Name="IdTipoEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="10" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_TipoEvento">
           <End Role="TipoEvento" Type="Self.TipoEvento" Multiplicity="0..1" />
@@ -70,10 +70,42 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EjercicioGitHubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="EjercicioGitHubEntities" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="Eventoes" EntityType="EjercicioGitHubModel.Evento" />
-          <EntitySet Name="TipoEventoes" EntityType="EjercicioGitHubModel.TipoEvento" />
-          <AssociationSet Name="FK_TipoEvento" Association="EjercicioGitHubModel.FK_TipoEvento">
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="IdEvento" />
+          </Key>
+          <Property Name="IdEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ubicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Costo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IdTipoEvento" Type="Int32" />
+          <NavigationProperty Name="TipoEvento" Relationship="Self.FK_TipoEvento" FromRole="Evento" ToRole="TipoEvento" />
+        </EntityType>
+        <EntityType Name="TipoEvento">
+          <Key>
+            <PropertyRef Name="IdTipoEvento" />
+          </Key>
+          <Property Name="IdTipoEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Eventoes" Relationship="Self.FK_TipoEvento" FromRole="TipoEvento" ToRole="Evento" />
+        </EntityType>
+        <Association Name="FK_TipoEvento">
+          <End Role="TipoEvento" Type="Self.TipoEvento" Multiplicity="0..1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoEvento">
+              <PropertyRef Name="IdTipoEvento" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="IdTipoEvento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EjercicioGitHubEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Eventoes" EntityType="Self.Evento" />
+          <EntitySet Name="TipoEventoes" EntityType="Self.TipoEvento" />
+          <AssociationSet Name="FK_TipoEvento" Association="Self.FK_TipoEvento">
             <End Role="TipoEvento" EntitySet="TipoEventoes" />
             <End Role="Evento" EntitySet="Eventoes" />
           </AssociationSet>
@@ -85,13 +117,9 @@
             <Parameter Name="IdTipoEvento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteEvento">
-            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+          <Parameter Name="IdEvento" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetAllEvento" ReturnType="Collection(EjercicioGitHubModel.GetAllEvento_Result)" />
           <FunctionImport Name="GetAllTipoEvento" ReturnType="Collection(EjercicioGitHubModel.GetAllTipoEvento_Result)" />
-          <FunctionImport Name="GetByIdEvento" ReturnType="Collection(EjercicioGitHubModel.GetByIdEvento_Result)">
-            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="UpdateEvento">
             <Parameter Name="IdEvento" Mode="In" Type="Int32" />
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -100,39 +128,15 @@
             <Parameter Name="Costo" Mode="In" Type="Decimal" />
             <Parameter Name="IdTipoEvento" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAllEvento" ReturnType="Collection(EjercicioGitHubModel.GetAllEvento_Result)" />
+          <FunctionImport Name="GetByIdEvento" ReturnType="Collection(EjercicioGitHubModel.GetByIdEvento_Result)">
+            <Parameter Name="IdEvento" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="Evento">
-          <Key>
-            <PropertyRef Name="IdEvento" />
-          </Key>
-          <Property Name="IdEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Ubicacion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Costo" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="IdTipoEvento" Type="Int32" />
-          <NavigationProperty Name="TipoEvento" Relationship="EjercicioGitHubModel.FK_TipoEvento" FromRole="Evento" ToRole="TipoEvento" />
-        </EntityType>
-        <EntityType Name="TipoEvento">
-          <Key>
-            <PropertyRef Name="IdTipoEvento" />
-          </Key>
-          <Property Name="IdTipoEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Eventoes" Relationship="EjercicioGitHubModel.FK_TipoEvento" FromRole="TipoEvento" ToRole="Evento" />
-        </EntityType>
-        <Association Name="FK_TipoEvento">
-          <End Type="EjercicioGitHubModel.TipoEvento" Role="TipoEvento" Multiplicity="0..1" />
-          <End Type="EjercicioGitHubModel.Evento" Role="Evento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoEvento">
-              <PropertyRef Name="IdTipoEvento" />
-            </Principal>
-            <Dependent Role="Evento">
-              <PropertyRef Name="IdTipoEvento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="GetAllTipoEvento_Result">
+          <Property Type="Int32" Name="IdTipoEvento" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+        </ComplexType>
         <ComplexType Name="GetAllEvento_Result">
           <Property Type="Int32" Name="IdEvento" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
@@ -140,11 +144,7 @@
           <Property Type="DateTime" Name="Fecha" Nullable="false" />
           <Property Type="Decimal" Name="Costo" Nullable="true" Precision="10" Scale="2" />
           <Property Type="Int32" Name="IdTipoEvento" Nullable="true" />
-          <Property Type="String" Name="Nombre1" Nullable="true" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="GetAllTipoEvento_Result">
-          <Property Type="Int32" Name="IdTipoEvento" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NombreEvento" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetByIdEvento_Result">
           <Property Type="Int32" Name="IdEvento" Nullable="false" />
@@ -153,36 +153,45 @@
           <Property Type="DateTime" Name="Fecha" Nullable="false" />
           <Property Type="Decimal" Name="Costo" Nullable="true" Precision="10" Scale="2" />
           <Property Type="Int32" Name="IdTipoEvento" Nullable="true" />
-          <Property Type="String" Name="Nombre1" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NombreEvento" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EjercicioGitHubModelStoreContainer" CdmEntityContainer="EjercicioGitHubEntities" >
+        <EntityContainerMapping StorageEntityContainer="EjercicioGitHubModelStoreContainer" CdmEntityContainer="EjercicioGitHubEntities">
           <EntitySetMapping Name="Eventoes">
             <EntityTypeMapping TypeName="EjercicioGitHubModel.Evento">
               <MappingFragment StoreEntitySet="Evento">
-                <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoEventoes">
             <EntityTypeMapping TypeName="EjercicioGitHubModel.TipoEvento">
               <MappingFragment StoreEntitySet="TipoEvento">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="AddEvento" FunctionName="EjercicioGitHubModel.Store.AddEvento" />
           <FunctionImportMapping FunctionImportName="DeleteEvento" FunctionName="EjercicioGitHubModel.Store.DeleteEvento" />
+          <FunctionImportMapping FunctionImportName="GetAllTipoEvento" FunctionName="EjercicioGitHubModel.Store.GetAllTipoEvento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EjercicioGitHubModel.GetAllTipoEvento_Result">
+                <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateEvento" FunctionName="EjercicioGitHubModel.Store.UpdateEvento" />
           <FunctionImportMapping FunctionImportName="GetAllEvento" FunctionName="EjercicioGitHubModel.Store.GetAllEvento">
             <ResultMapping>
               <ComplexTypeMapping TypeName="EjercicioGitHubModel.GetAllEvento_Result">
@@ -192,15 +201,7 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />
                 <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
-                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetAllTipoEvento" FunctionName="EjercicioGitHubModel.Store.GetAllTipoEvento">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EjercicioGitHubModel.GetAllTipoEvento_Result">
-                <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NombreEvento" ColumnName="NombreEvento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -213,11 +214,10 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />
                 <ScalarProperty Name="IdTipoEvento" ColumnName="IdTipoEvento" />
-                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
+                <ScalarProperty Name="NombreEvento" ColumnName="NombreEvento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="UpdateEvento" FunctionName="EjercicioGitHubModel.Store.UpdateEvento" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -232,7 +232,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

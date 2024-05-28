@@ -50,66 +50,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="CRUDGitHub.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CRUDGitHub.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CRUDGitHub.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CRUDGitHub.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CRUDGitHub.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CRUDGitHub.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Evento.cs">
-      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+      <DependentUpon>PracticaGitHub.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllEvento_Result.cs">
-      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+      <DependentUpon>PracticaGitHub.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAllTipoEvento_Result.cs">
-      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+      <DependentUpon>PracticaGitHub.tt</DependentUpon>
     </Compile>
     <Compile Include="GetByIdEvento_Result.cs">
-      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+      <DependentUpon>PracticaGitHub.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PracticaGitHub.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PracticaGitHub.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PracticaGitHub.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PracticaGitHub.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PracticaGitHub.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PracticaGitHub.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoEvento.cs">
-      <DependentUpon>CRUDGitHub.tt</DependentUpon>
+      <DependentUpon>PracticaGitHub.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="CRUDGitHub.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CRUDGitHub.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="CRUDGitHub.edmx.diagram">
-      <DependentUpon>CRUDGitHub.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CRUDGitHub.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CRUDGitHub.Context.cs</LastGenOutput>
-      <DependentUpon>CRUDGitHub.edmx</DependentUpon>
-    </Content>
-    <Content Include="CRUDGitHub.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CRUDGitHub.edmx</DependentUpon>
-      <LastGenOutput>CRUDGitHub.cs</LastGenOutput>
-    </Content>
+    <EntityDeploy Include="PracticaGitHub.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PracticaGitHub.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PracticaGitHub.edmx.diagram">
+      <DependentUpon>PracticaGitHub.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PracticaGitHub.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PracticaGitHub.edmx</DependentUpon>
+      <LastGenOutput>PracticaGitHub.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PracticaGitHub.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PracticaGitHub.edmx</DependentUpon>
+      <LastGenOutput>PracticaGitHub.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

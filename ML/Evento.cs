@@ -13,7 +13,9 @@ namespace ML
         public string Ubicacion { get; set; }
         public DateTime Fecha { get; set; }
         public decimal Costo { get; set; }
+
         public ML.TipoEvento TipoEvento { get; set; }
+
         public List<ML.Evento> Eventos { get; set; }
     }
 }

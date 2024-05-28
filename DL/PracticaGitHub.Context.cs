@@ -64,23 +64,9 @@ namespace DL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteEvento", idEventoParameter);
         }
     
-        public virtual ObjectResult<GetAllEvento_Result> GetAllEvento()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllEvento_Result>("GetAllEvento");
-        }
-    
         public virtual ObjectResult<GetAllTipoEvento_Result> GetAllTipoEvento()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllTipoEvento_Result>("GetAllTipoEvento");
-        }
-    
-        public virtual ObjectResult<GetByIdEvento_Result> GetByIdEvento(Nullable<int> idEvento)
-        {
-            var idEventoParameter = idEvento.HasValue ?
-                new ObjectParameter("IdEvento", idEvento) :
-                new ObjectParameter("IdEvento", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByIdEvento_Result>("GetByIdEvento", idEventoParameter);
         }
     
         public virtual int UpdateEvento(Nullable<int> idEvento, string nombre, string ubicacion, Nullable<System.DateTime> fecha, Nullable<decimal> costo, Nullable<int> idTipoEvento)
@@ -110,6 +96,20 @@ namespace DL
                 new ObjectParameter("IdTipoEvento", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateEvento", idEventoParameter, nombreParameter, ubicacionParameter, fechaParameter, costoParameter, idTipoEventoParameter);
+        }
+    
+        public virtual ObjectResult<GetAllEvento_Result> GetAllEvento()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllEvento_Result>("GetAllEvento");
+        }
+    
+        public virtual ObjectResult<GetByIdEvento_Result> GetByIdEvento(Nullable<int> idEvento)
+        {
+            var idEventoParameter = idEvento.HasValue ?
+                new ObjectParameter("IdEvento", idEvento) :
+                new ObjectParameter("IdEvento", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetByIdEvento_Result>("GetByIdEvento", idEventoParameter);
         }
     }
 }

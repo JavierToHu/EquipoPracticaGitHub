@@ -19,6 +19,6 @@ namespace DL
         public System.DateTime Fecha { get; set; }
         public Nullable<decimal> Costo { get; set; }
         public Nullable<int> IdTipoEvento { get; set; }
-        public string Nombre1 { get; set; }
+        public string NombreEvento { get; set; }
     }
 }

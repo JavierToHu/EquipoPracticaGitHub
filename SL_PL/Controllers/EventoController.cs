@@ -13,13 +13,12 @@ namespace SL_PL.Controllers
         [Route("api/Evento/GetAll")]
         public IHttpActionResult GetAll()
         {
-            var result = BL.Evento.GetAllEvento();
+            var result = BL.Evento.GetAll();
 
             if (result.Item1)
             {
-                return Content(HttpStatusCode.OK, result);
+                return Content(HttpStatusCode.OK, result.Item3);
             }
-
             else
             {
                 return Content(HttpStatusCode.BadRequest, result.Item2);
@@ -79,7 +78,7 @@ namespace SL_PL.Controllers
         }
 
         [HttpGet]
-        [Route("api/TipoEvento/GetById")]
+        [Route("api/Evento/GetById")]
 
         public IHttpActionResult GetById(int IdEvento)
         {
@@ -87,7 +86,7 @@ namespace SL_PL.Controllers
 
             if (result.Item1)
             {
-                return Content(HttpStatusCode.OK, result);
+                return Content(HttpStatusCode.OK, result.Item3);
             }
             else
             {

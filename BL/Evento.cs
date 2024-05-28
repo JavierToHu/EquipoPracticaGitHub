@@ -15,7 +15,7 @@ namespace BL
 			{
 				using (DL.EjercicioGitHubEntities context = new DL.EjercicioGitHubEntities())
 				{
-					int rowsAffected = context.AddEvento(evento.Nombre, evento.Ubicacion, evento.Fecha, evento.Costo);
+					int rowsAffected = context.AddEvento(evento.Nombre, evento.Ubicacion, evento.Fecha, evento.Costo, evento.TipoEvento.IdTipoEvento);
 
 					if (rowsAffected > 0)
 					{
@@ -39,7 +39,7 @@ namespace BL
 			{
 				using (DL.EjercicioGitHubEntities context = new DL.EjercicioGitHubEntities())
 				{
-					int rowsAffected = context.UpdateEvento(evento.IdEvento, evento.Nombre, evento.Ubicacion, evento.Fecha, evento.Costo);
+					int rowsAffected = context.UpdateEvento(evento.IdEvento, evento.Nombre, evento.Ubicacion, evento.Fecha, evento.Costo, evento.TipoEvento.IdTipoEvento);
 
 					if (rowsAffected > 0)
 					{
@@ -90,7 +90,7 @@ namespace BL
 				{
 					var eventos = context.GetAllEvento().ToList();
 
-					if (result != null)
+					if (eventos != null)
 					{
 						evento.Eventos = new List<ML.Evento>();
 
@@ -102,7 +102,11 @@ namespace BL
 							eventoObj.Nombre = eventoDB.Nombre;
 							eventoObj.Ubicacion = eventoDB.Ubicacion;
 							eventoObj.Fecha = eventoDB.Fecha;
-							eventoObj.Costo = eventoDB.Costo;
+							eventoObj.Costo = Convert.ToDecimal(eventoDB.Costo);
+
+							eventoObj.TipoEvento = new ML.TipoEvento();
+							eventoObj.TipoEvento.IdTipoEvento = Convert.ToInt32(eventoDB.IdTipoEvento);
+							eventoObj.TipoEvento.Nombre = eventoDB.NombreEvento;
 
 							evento.Eventos.Add(eventoObj);
                         }
@@ -129,7 +133,7 @@ namespace BL
 			{
 				using (DL.EjercicioGitHubEntities context = new DL.EjercicioGitHubEntities())
 				{
-					var eventoDB = context.GetById(IdEvento).singleOrDefault();
+					var eventoDB = context.GetByIdEvento(IdEvento).SingleOrDefault();
 					
 					if (eventoDB != null)
 					{
@@ -137,7 +141,11 @@ namespace BL
                         evento.Nombre = eventoDB.Nombre;
                         evento.Ubicacion = eventoDB.Ubicacion;
                         evento.Fecha = eventoDB.Fecha;
-                        evento.Costo = eventoDB.Costo;
+                        evento.Costo = Convert.ToDecimal(eventoDB.Costo);
+
+                        evento.TipoEvento = new ML.TipoEvento();
+                        evento.TipoEvento.IdTipoEvento = Convert.ToInt32(eventoDB.IdTipoEvento);
+						evento.TipoEvento.Nombre = eventoDB.NombreEvento;
 
                         return (true, null, evento);
                     }
