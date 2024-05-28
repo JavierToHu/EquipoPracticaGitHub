@@ -8,7 +8,7 @@ namespace BL
 {
     public class TipoEvento
     {
-        public (bool, string, List<ML.TipoEvento>, Exception) GetAllTipoEvento()
+        public static (bool, string, List<ML.TipoEvento>, Exception) GetAllTipoEvento()
         {
             List<ML.TipoEvento> tipoEventos = new List<ML.TipoEvento>();
 
