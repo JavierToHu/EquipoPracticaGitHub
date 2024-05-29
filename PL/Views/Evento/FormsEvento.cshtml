@@ -1,4 +1,4 @@
-﻿@model ML.Evento
+@model ML.Evento
 
 @{
     ViewBag.Title = "FormsEvento";
@@ -29,7 +29,18 @@
             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card highlighted-border">
                     <div class="card-body p-5">
-                        <h2 class="text-uppercase text-center mb-5">Registrar Evento</h2>
+
+                        @Html.HiddenFor(model => model.IdEvento)
+
+                        @if (Model.IdEvento != 0)
+                        {
+                            <h2 class="text-uppercase text-center mb-5">Actualizar Evento</h2>
+
+                        }
+                        else
+                        {
+                            <h2 class="text-uppercase text-center mb-5">Registrar Evento</h2>
+                        }
 
                         <form method="post">
 
@@ -51,28 +62,44 @@
                             </div>
 
 
+
+
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.Costo, new { @class = "" })
                                 @Html.TextBoxFor(model => model.Costo, new { @class = "form-control", @onkeyup = "SoloNumeros(this,'lblCosto')" })
                                 <label id="lblCosto" class="text-danger">@Html.ValidationMessageFor(model => model.Costo)</label>
                             </div>
+                          
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
                                 @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
                                 <label id="lblEvento" class="text-danger">@Html.ValidationMessageFor(model => model.TipoEvento.IdTipoEvento)</label>
                             </div>
-
-                            @*<div data-mdb-input-init class="form-outline mb-4">
-                                @Html.TextBoxFor(model => model.TipoCatalogo, new { @class = "form-control form-control-lg", id = "form3Example4cdg" })
-                                @Html.LabelFor(model => model.TipoCatalogo, "Tipo Catalogo", new { @class = "form-label" })
-                                @Html.ValidationMessageFor(model => model.TipoCatalogo, "", new { @class = "text-danger" })
-                            </div>*@
-
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-block btn-lg text-body">
-                                    Registrar
-                                </button>
-                            </div>
+                      
+                            @if (Model.IdEvento != 0)
+                            {
+                                <div class="row justify-content-center">
+                                    <div class="col-md-5">
+                                        <hr width="100%" style="margin:10px 0; " />
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-success">Actualizar <i class="bi bi-pencil-square"></i></button>
+                                            <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row justify-content-center">
+                                    <div class="col-md-5">
+                                        <hr width="100%" style="margin:10px 0; " />
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" class="btn btn-success">Agregar <i class="bi bi-check-lg"></i></button>
+                                            <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </form>
                     </div>
                 </div>
@@ -124,3 +151,5 @@
         }
     }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+

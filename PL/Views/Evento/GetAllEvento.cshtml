@@ -22,7 +22,7 @@
                 <h2 style="font-weight: bold;">Eventos</h2>
             </div>
             <div class="col-6" style="text-align: end; padding: 0px;">
-                <a href="@Url.Action("FormsEvento", "Evento")" class="btn btn-success">Agregar Libro <i class="bi bi-plus-circle"></i></a>
+                <a href="@Url.Action("FormsEvento", "Evento")" class="btn btn-success">Agregar Evento <i class="bi bi-plus-circle"></i></a>
             </div>
         </div>
         <div class="row">
@@ -33,6 +33,7 @@
                         <th style="background-color: #214a16; color: white;">Ubicación</th>
                         <th style="background-color: #214a16; color: white;">Fecha</th>
                         <th style="background-color: #214a16; color: white;">Costo</th>
+                        <th style="background-color: #214a16; color: white;">Evento</th>
                         <th style="background-color: #214a16; color: white;">Editar</th>
                         <th style="background-color: #214a16; color: white;">Eliminar</th>
                     </tr>
@@ -44,11 +45,11 @@
                             <td style="background-color: #cefbbb;">@eventoItem.Nombre</td>
                             <td style="background-color: #cefbbb;">@eventoItem.Ubicacion</td>
                             <td style="background-color: #cefbbb;">@eventoItem.Fecha.ToString("dd/MM/yyyy")</td>
-                            <td style="background-color: #cefbbb;">@eventoItem.Costo</td>
-                            <td style="background-color: #cefbbb;"><a href="@Url.Action("FormsEvento", "Evento", new {IdEvento = eventoItem.IdEvento})" class="btn btn-warning" style="color: white;"><i class="bi bi-pencil"></i> </a></td>
-                            <td style="background-color: #cefbbb;"><a href="@Url.Action("DeleteEvento", "Evento", new {IdEvento = eventoItem.IdEvento})" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
+                            <td style="background-color: #cefbbb;">$ @eventoItem.Costo</td>
+                            <td style="background-color: #cefbbb;">@eventoItem.TipoEvento.Nombre</td>
+                            <td style="background-color: #cefbbb;" onclick="return confirm('¿Estás seguro de que deseas actualizar este evento?')" ><a href="@Url.Action("FormsEvento", "Evento", new {IdEvento = eventoItem.IdEvento})" class="btn btn-warning" style="color: white;"><i class="bi bi-pencil"></i> </a></td>
+                            <td style="background-color: #cefbbb;" onclick="return confirm('¿Estás seguro de que deseas eliminar este evento?')"><a href="@Url.Action("DeleteEvento", "Evento", new {IdEvento = eventoItem.IdEvento})" class="btn btn-danger"><i class="bi bi-trash"></i></a></td>
                         </tr>
-
                     }
                 </tbody>
             </table>
