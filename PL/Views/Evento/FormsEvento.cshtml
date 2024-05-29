@@ -60,14 +60,16 @@
                             </div>
 
 
+
+
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.Costo, new { @class = "" })
                                 @Html.TextBoxFor(model => model.Costo, new { @class = "form-control" })
                             </div>
-                            <div data-mdb-input-init class="form-label mb-4">
-                                @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
-                                @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
-                            </div>
+                                <div data-mdb-input-init class="form-label mb-4">
+                @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
+                @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
+            </div>
 
                             @if (Model.IdEvento != 0)
                             {

@@ -13,8 +13,8 @@ namespace ML
         public string Nombre { get; set; }
         public string Ubicacion { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime TuFecha { get; set; }
         public DateTime Fecha { get; set; }
         public decimal Costo { get; set; }
 
