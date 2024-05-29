@@ -10,13 +10,20 @@ namespace ML
     public class Evento
     {
         public int IdEvento { get; set; }
+
+        [Required (ErrorMessage = "El campo es requerido")]
         public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]
         public string Ubicacion { get; set; }
 
+        [Required(ErrorMessage = "El campo es requerido")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Fecha { get; set; }
-        public decimal Costo { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]
+        public decimal Costo { get; set; } 
 
         public ML.TipoEvento TipoEvento { get; set; }
 

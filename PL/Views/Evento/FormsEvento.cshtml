@@ -35,12 +35,14 @@
 
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.Nombre, new { @class = "" })
-                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @onkeyup = "SoloLetras(this,'lblNombre')" })
+                                <label id="lblNombre" class="text-danger">@Html.ValidationMessageFor(model => model.Nombre)</label>
                             </div>
 
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.Ubicacion, new { @class = "" })
                                 @Html.TextBoxFor(model => model.Ubicacion, new { @class = "form-control" })
+                                <label id="lblUbicacion" class="text-danger">@Html.ValidationMessageFor(model => model.Ubicacion)</label>
                             </div>
 
                             <div data-mdb-input-init class="form-label mb-4">
@@ -51,11 +53,13 @@
 
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.Costo, new { @class = "" })
-                                @Html.TextBoxFor(model => model.Costo, new { @class = "form-control" })
+                                @Html.TextBoxFor(model => model.Costo, new { @class = "form-control", @onkeyup = "SoloNumeros(this,'lblCosto')" })
+                                <label id="lblCosto" class="text-danger">@Html.ValidationMessageFor(model => model.Costo)</label>
                             </div>
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
                                 @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
+                                <label id="lblEvento" class="text-danger">@Html.ValidationMessageFor(model => model.TipoEvento.IdTipoEvento)</label>
                             </div>
 
                             @*<div data-mdb-input-init class="form-outline mb-4">
@@ -69,7 +73,7 @@
                                     Registrar
                                 </button>
                             </div>
-                        }
+                        </form>
                     </div>
                 </div>
             </div>
@@ -77,5 +81,46 @@
     </div>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+<script>
+    function SoloLetras(input, label) {
+        var valor = $(input).val();
+        var regex = /^[a-zA-Z ]+$/
 
+        if (valor == "") {
+            $(input).removeClass('is-invalid');
+            $('#' + label).text("");
+        } else {
+            if (regex.test(valor)) {
+                $(input).removeClass('is-invalid');
+                $('#' + label).text("");
+            }
+            else {
+                $(input).addClass('is-invalid');
+                $('#' + label).text("Solo puedes ingresar letras");
+                valor = valor.substring(0, valor.length - 1);
+                $(input).val(valor);
+            }
+        }
+    }
+
+    function SoloNumeros(input, label) {
+        var valor = $(input).val();
+        var regex = /^[0-9,$]*$/
+
+        if (valor == "") {
+            $(input).removeClass('is-invalid');
+            $('#' + label).text("");
+        } else {
+            if (regex.test(valor)) {
+                $(input).removeClass('is-invalid');
+                $('#' + label).text("");
+            }
+            else {
+                $(input).addClass('is-invalid');
+                $('#' + label).text("Solo puedes ingresar numeros");
+                valor = valor.substring(0, valor.length - 1);
+                $(input).val(valor);
+            }
+        }
+    }
+</script>

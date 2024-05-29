@@ -92,48 +92,64 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult FormsEvento(ML.Evento evento)
         {
-            if (evento.IdEvento != 0) //Update
+            if (ModelState.IsValid)
             {
-                using (HttpClient client = new HttpClient())
+                if (evento.IdEvento != 0) //Update
                 {
-                    client.BaseAddress = new Uri("https://localhost:44326/");
-                    var responseTask = client.PutAsJsonAsync<ML.Evento>("api/Evento/Update", evento);
-
-                    var resultTask = responseTask.Result;
-
-                    if (resultTask.IsSuccessStatusCode)
+                    using (HttpClient client = new HttpClient())
                     {
-                        ViewBag.Text = "Se actualizo exitosamente";
+                        client.BaseAddress = new Uri("https://localhost:44326/");
+                        var responseTask = client.PutAsJsonAsync<ML.Evento>("api/Evento/Update", evento);
+
+                        var resultTask = responseTask.Result;
+
+                        if (resultTask.IsSuccessStatusCode)
+                        {
+                            ViewBag.Text = "Se actualizo exitosamente";
+                        }
+                        else
+                        {
+                            ViewBag.Text = "No se actualizo exitosamente";
+                        }
+                        return PartialView("Modal");
                     }
-                    else
+                }
+                else //ADD
+                {
+                    using (HttpClient client = new HttpClient())
                     {
-                        ViewBag.Text = "No se actualizo exitosamente";
+                        client.BaseAddress = new Uri("https://localhost:44326/");
+                        var responseTask = client.PostAsJsonAsync<ML.Evento>("api/Evento/Add", evento);
+
+                        responseTask.Wait();
+
+                        var resultTask = responseTask.Result;
+
+                        if (resultTask.IsSuccessStatusCode)
+                        {
+                            ViewBag.Text = "Se agrego exitosamente";
+                        }
+                        else
+                        {
+                            ViewBag.Text = "No se agrego exitosamente";
+                        }
+                        return PartialView("Modal");
                     }
-                    return PartialView("Modal");
                 }
             }
-            else //ADD
+            else
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri("https://localhost:44326/");
-                    var responseTask = client.PostAsJsonAsync<ML.Evento>("api/Evento/Add", evento);
+                ML.Evento eventoForms = new ML.Evento();
 
-                    responseTask.Wait();
+                eventoForms.TipoEvento = new ML.TipoEvento();
 
-                    var resultTask = responseTask.Result;
+                var resulteEvento = BL.TipoEvento.GetAllTipoEvento();
+                List<ML.TipoEvento> EventoLista = resulteEvento.Item3;
 
-                    if (resultTask.IsSuccessStatusCode)
-                    {
-                        ViewBag.Text = "Se agrego exitosamente";
-                    }
-                    else
-                    {
-                        ViewBag.Text = "No se agrego exitosamente";
-                    }
-                    return PartialView("Modal");
-                }
+                eventoForms.TipoEvento.TiposEventos = EventoLista;
+                return View(eventoForms);
             }
+            
         }
 
         [HttpGet]
