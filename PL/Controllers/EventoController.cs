@@ -128,7 +128,6 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult FormsEvento(ML.Evento evento)
         {
-
             if (ModelState.IsValid)
             {
                 if (evento.IdEvento != 0) //Update
@@ -157,9 +156,6 @@ namespace PL.Controllers
                     {
                         client.BaseAddress = new Uri("https://localhost:44326/");
                         var responseTask = client.PostAsJsonAsync<ML.Evento>("api/Evento/Add", evento);
-
-                        responseTask.Wait();
-
                         var resultTask = responseTask.Result;
 
                         if (resultTask.IsSuccessStatusCode)
@@ -173,10 +169,19 @@ namespace PL.Controllers
                         return PartialView("Modal");
                     }
                 }
-
             }
+            else
+            {
+                ML.Evento eventoForms = new ML.Evento();
 
-            return View(evento);
+                eventoForms.TipoEvento = new ML.TipoEvento();
+
+                var resulteEvento = BL.TipoEvento.GetAllTipoEvento();
+                List<ML.TipoEvento> EventoLista = resulteEvento.Item3;
+
+                eventoForms.TipoEvento.TiposEventos = EventoLista;
+                return View(eventoForms);
+            }
         }
 
         [HttpGet]
