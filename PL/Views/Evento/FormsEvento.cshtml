@@ -42,59 +42,58 @@
                             <h2 class="text-uppercase text-center mb-5">Registrar Evento</h2>
                         }
 
-                        <form method="post">
+                    <form method="post">
 
-                            <div data-mdb-input-init class="form-label mb-4">
-                                @Html.LabelFor(model => model.Nombre, new { @class = "" })
-                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
-                            </div>
+                        <div data-mdb-input-init class="form-label mb-4">
+                            @Html.LabelFor(model => model.Nombre, new { @class = "" })
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                        </div>
 
-                            <div data-mdb-input-init class="form-label mb-4">
-                                @Html.LabelFor(model => model.Ubicacion, new { @class = "" })
-                                @Html.TextBoxFor(model => model.Ubicacion, new { @class = "form-control" })
-                            </div>
+                        <div data-mdb-input-init class="form-label mb-4">
+                            @Html.LabelFor(model => model.Ubicacion, new { @class = "" })
+                            @Html.TextBoxFor(model => model.Ubicacion, new { @class = "form-control" })
+                        </div>
 
-                            <div data-mdb-input-init class="form-label mb-4">
-                                @Html.LabelFor(model => model.Fecha, new { @class = "" })
-                                @Html.EditorFor(model => model.Fecha, new { @htmlAttributes = new { @class = "form-control", @type = "date" } })
-                            </div>
+                        <div data-mdb-input-init class="form-label mb-4">
+                            @Html.LabelFor(model => model.Fecha, new { @class = "" })
+                            @Html.EditorFor(model => model.Fecha, new { @htmlAttributes = new { @class = "form-control", @type = "date" } })
+                        </div>
 
+                        <div data-mdb-input-init class="form-label mb-4">
+                            @Html.LabelFor(model => model.Costo, new { @class = "" })
+                            @Html.TextBoxFor(model => model.Costo, new { @class = "form-control" })
+                        </div>
+                        <div data-mdb-input-init class="form-label mb-4">
+                            @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
+                            @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
+                        </div>
 
-                            <div data-mdb-input-init class="form-label mb-4">
-                                @Html.LabelFor(model => model.Costo, new { @class = "" })
-                                @Html.TextBoxFor(model => model.Costo, new { @class = "form-control" })
-                            </div>
-                            <div data-mdb-input-init class="form-label mb-4">
-                                @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
-                                @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
-                            </div>
-
-                            @if (Model.IdEvento != 0)
-                            {
-                                <div class="row justify-content-center">
-                                    <div class="col-md-5">
-                                        <hr width="100%" style="margin:10px 0; " />
-                                        <div class="d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-success">Actualizar <i class="bi bi-pencil-square"></i></button>
-                                            <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
-                                        </div>
+                        @if (Model.IdEvento != 0)
+                        {
+                            <div class="row justify-content-center">
+                                <div class="col-md-5">
+                                    <hr width="100%" style="margin:10px 0; " />
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-success">Actualizar <i class="bi bi-pencil-square"></i></button>
+                                        <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
                                     </div>
                                 </div>
-                            }
-                            else
-                            {
-                                <div class="row justify-content-center">
-                                    <div class="col-md-5">
-                                        <hr width="100%" style="margin:10px 0; " />
-                                        <div class="d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-success">Agregar <i class="bi bi-check-lg"></i></button>
-                                            <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
-                                        </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row justify-content-center">
+                                <div class="col-md-5">
+                                    <hr width="100%" style="margin:10px 0; " />
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-success">Agregar <i class="bi bi-check-lg"></i></button>
+                                        <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
                                     </div>
                                 </div>
-                            }
+                            </div>
+                        }
 
-                        </form>
+                    </form>
                     </div>
                 </div>
             </div>
