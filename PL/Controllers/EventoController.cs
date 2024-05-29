@@ -155,7 +155,7 @@ namespace PL.Controllers
                     using (HttpClient client = new HttpClient())
                     {
                         client.BaseAddress = new Uri("https://localhost:44326/");
-                        var responseTask = client.PutAsJsonAsync<ML.Evento>("api/Evento/Update", evento);
+                        var responseTask = client.PostAsJsonAsync<ML.Evento>("api/Evento/Add", evento);
                         var resultTask = responseTask.Result;
 
                         if (resultTask.IsSuccessStatusCode)
@@ -182,7 +182,6 @@ namespace PL.Controllers
                 eventoForms.TipoEvento.TiposEventos = EventoLista;
                 return View(eventoForms);
             }
-            return View(evento);
         }
 
         [HttpGet]

@@ -61,9 +61,6 @@
                                 @Html.EditorFor(model => model.Fecha, new { @htmlAttributes = new { @class = "form-control", @type = "date" } })
                             </div>
 
-
-
-
                             <div data-mdb-input-init class="form-label mb-4">
                                 @Html.LabelFor(model => model.Costo, new { @class = "" })
                                 @Html.TextBoxFor(model => model.Costo, new { @class = "form-control", @onkeyup = "SoloNumeros(this,'lblCosto')" })
@@ -152,4 +149,3 @@
     }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
-
