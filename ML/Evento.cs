@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,13 +10,21 @@ namespace ML
     public class Evento
     {
         public int IdEvento { get; set; }
+
+        [Required (ErrorMessage = "El campo es requerido")]
         public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]
         public string Ubicacion { get; set; }
 
+        [Required(ErrorMessage = "El campo es requerido")]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime TuFecha { get; set; }
         public DateTime Fecha { get; set; }
-        public decimal Costo { get; set; }
+
+        [Required(ErrorMessage = "El campo es requerido")]
+        public decimal Costo { get; set; } 
 
         public ML.TipoEvento TipoEvento { get; set; }
 
