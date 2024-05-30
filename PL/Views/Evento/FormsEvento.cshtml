@@ -28,72 +28,71 @@
         <div class="row d-flex justify-content-center w-100">
             <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                 <div class="card highlighted-border">
-                    <div class="card-body p-5">
+                    <div class="card-body p-12">
 
                         @Html.HiddenFor(model => model.IdEvento)
 
                         @if (Model.IdEvento != 0)
                         {
-                            <h2 class="text-uppercase text-center mb-5">Actualizar Evento</h2>
-
+                            <h2 class="text-uppercase text-center mb-5 fw-bold">Actualizar Evento</h2>
                         }
                         else
                         {
-                            <h2 class="text-uppercase text-center mb-5">Registrar Evento</h2>
+                            <h2 class="text-uppercase text-center mb-5 fw-bold">Registrar Evento</h2>
                         }
 
-                    <form method="post">
+                        <form method="post" class="d-flex flex-column align-items-center">
 
-                        <div data-mdb-input-init class="form-label mb-4">
-                            @Html.LabelFor(model => model.Nombre, new { @class = "" })
-                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
-                        </div>
+                            <div class="form-label mb-4 w-75">
+                                @Html.LabelFor(model => model.Nombre, new { @class = "fw-bold" })
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @onkeyup = "SoloLetras(this,'lblNombre')" })
+                                <label id="lblNombre" class="text-danger">@Html.ValidationMessageFor(model => model.Nombre)</label>
+                            </div>
 
-                        <div data-mdb-input-init class="form-label mb-4">
-                            @Html.LabelFor(model => model.Ubicacion, new { @class = "" })
-                            @Html.TextBoxFor(model => model.Ubicacion, new { @class = "form-control" })
-                        </div>
+                            <div class="form-label mb-4 w-75">
+                                @Html.LabelFor(model => model.Ubicacion, new { @class = "fw-bold" })
+                                @Html.TextBoxFor(model => model.Ubicacion, new { @class = "form-control" })
+                                <label id="lblUbicacion" class="text-danger">@Html.ValidationMessageFor(model => model.Ubicacion)</label>
+                            </div>
 
-                        <div data-mdb-input-init class="form-label mb-4">
-                            @Html.LabelFor(model => model.Fecha, new { @class = "" })
-                            @Html.EditorFor(model => model.Fecha, new { @htmlAttributes = new { @class = "form-control", @type = "date" } })
-                        </div>
+                            <div class="form-label mb-4 w-75">
+                                @Html.LabelFor(model => model.Fecha, new { @class = "fw-bold" })
+                                @Html.EditorFor(model => model.Fecha, new { @htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            </div>
 
-                        <div data-mdb-input-init class="form-label mb-4">
-                            @Html.LabelFor(model => model.Costo, new { @class = "" })
-                            @Html.TextBoxFor(model => model.Costo, new { @class = "form-control" })
-                        </div>
-                        <div data-mdb-input-init class="form-label mb-4">
-                            @Html.LabelFor(model => model.TipoEvento, new { @class = "" })
-                            @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
-                        </div>
+                            <div class="form-label mb-4 w-75">
+                                @Html.LabelFor(model => model.Costo, new { @class = "fw-bold" })
+                                @Html.TextBoxFor(model => model.Costo, new { @class = "form-control", @onkeyup = "SoloNumeros(this,'lblCosto')" })
+                                <label id="lblCosto" class="text-danger">@Html.ValidationMessageFor(model => model.Costo)</label>
+                            </div>
 
-                        @if (Model.IdEvento != 0)
-                        {
-                            <div class="row justify-content-center">
-                                <div class="col-md-5">
-                                    <hr width="100%" style="margin:10px 0; " />
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-success">Actualizar <i class="bi bi-pencil-square"></i></button>
-                                        <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
+                            <div class="form-label mb-4 w-75">
+                                <label class="fw-bold">Tipo de Evento</label>
+                                @Html.DropDownListFor(model => model.TipoEvento.IdTipoEvento, new SelectList(Model.TipoEvento.TiposEventos, "IdTipoEvento", "Nombre"), "Selecciona una opcion", new { @class = "form-control", @required = "" })
+                            </div>
+
+                            @if (Model.IdEvento != 0)
+                            {
+                                <div class="w-75">
+                                    <hr width="100%" />
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-success fw-bold">Actualizar <i class="bi bi-pencil-square"></i></button>
+                                        <a href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning fw-bold">Regresar <i class="bi bi-arrow-return-left"></i></a>
                                     </div>
                                 </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="row justify-content-center">
-                                <div class="col-md-5">
-                                    <hr width="100%" style="margin:10px 0; " />
-                                    <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-success">Agregar <i class="bi bi-check-lg"></i></button>
-                                        <a style="margin-left: 6px;" href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning">Regresar <i class="bi bi-arrow-return-left"></i></a>
+                            }
+                            else
+                            {
+                                <div class="w-75">
+                                    <hr width="100%" />
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-success fw-bold">Agregar <i class="bi bi-check-lg"></i></button>
+                                        <a href="@Url.Action("GetAllEvento", "Evento")" class="btn btn-warning fw-bold">Regresar <i class="bi bi-arrow-return-left"></i></a>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
 
-                    </form>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -102,3 +101,44 @@
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+
+<script>
+    function SoloLetras(input, label) {
+        var valor = $(input).val();
+        var regex = /^[a-zA-Z ]+$/
+        if (valor == "") {
+            $(input).removeClass('is-invalid');
+            $('#' + label).text("");
+        } else {
+            if (regex.test(valor)) {
+                $(input).removeClass('is-invalid');
+                $('#' + label).text("");
+            }
+            else {
+                $(input).addClass('is-invalid');
+                $('#' + label).text("Solo puedes ingresar letras");
+                valor = valor.substring(0, valor.length - 1);
+                $(input).val(valor);
+            }
+        }
+    }
+    function SoloNumeros(input, label) {
+        var valor = $(input).val();
+        var regex = /^[0-9,$]*$/
+        if (valor == "") {
+            $(input).removeClass('is-invalid');
+            $('#' + label).text("");
+        } else {
+            if (regex.test(valor)) {
+                $(input).removeClass('is-invalid');
+                $('#' + label).text("");
+            }
+            else {
+                $(input).addClass('is-invalid');
+                $('#' + label).text("Solo puedes ingresar numeros");
+                valor = valor.substring(0, valor.length - 1);
+                $(input).val(valor);
+            }
+        }
+    }
+</script>

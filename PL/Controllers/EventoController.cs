@@ -42,53 +42,6 @@ namespace PL.Controllers
             }
         }
 
-        //[HttpGet]
-        //public ActionResult FormsEvento(int? IdEvento)
-        //{
-        //    ML.Evento eventoForms = new ML.Evento();
-
-        //    eventoForms.TipoEvento = new ML.TipoEvento();
-
-        //    var resulteEvento = BL.TipoEvento.GetAllTipoEvento();
-        //    List<ML.TipoEvento> EventoLista = resulteEvento.Item3;
-
-
-        //    if (IdEvento != null) //UPDATE
-        //    {
-        //        using (HttpClient client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri("https://localhost:44326/");
-        //            var responseTask = client.GetAsync("api/Evento/GetById?IdEvento=" + IdEvento);
-
-        //            responseTask.Wait();
-
-        //            var resultTask = responseTask.Result;
-
-        //            if (resultTask.IsSuccessStatusCode)
-        //            {
-        //                var readTask = resultTask.Content.ReadAsAsync<ML.Evento>(); 
-
-        //                readTask.Wait();
-
-        //                eventoForms = readTask.Result;
-
-        //                eventoForms.TipoEvento.TiposEventos = EventoLista;
-
-        //                return View(eventoForms);
-        //            }
-        //            else
-        //            {
-        //                return View(eventoForms);
-        //            }
-        //        }
-        //    }
-        //    else //ADD
-        //    {
-        //        eventoForms.TipoEvento.TiposEventos = EventoLista;
-        //        return View(eventoForms);
-        //    }
-        //}
-
         [HttpGet]
         public ActionResult FormsEvento(int? IdEvento)
         {

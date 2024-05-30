@@ -23,8 +23,9 @@ namespace ML
         public DateTime Fecha { get; set; }
 
         [Required(ErrorMessage = "El campo es requerido")]
-        public decimal Costo { get; set; } 
+        public decimal Costo { get; set; }
 
+        [Display(Name = "Tipo de Evento")]
         public ML.TipoEvento TipoEvento { get; set; }
 
         public List<ML.Evento> Eventos { get; set; }
